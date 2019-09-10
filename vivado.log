@@ -1,0 +1,14 @@
+#-----------------------------------------------------------
+# Vivado v2019.1 (64-bit)
+# SW Build 2552052 on Fri May 24 14:47:09 MDT 2019
+# IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+# Start of session at: Tue Sep 10 08:11:15 2019
+# Process ID: 29657
+# Current directory: /home/ramdas/ubuntu/chisel/freedom
+# Command line: vivado
+# Log file: /home/ramdas/ubuntu/chisel/freedom/vivado.log
+# Journal file: /home/ramdas/ubuntu/chisel/freedom/vivado.jou
+#-----------------------------------------------------------
+start_gui
+exit
+INFO: [Common 17-206] Exiting Vivado at Tue Sep 10 08:13:45 2019...

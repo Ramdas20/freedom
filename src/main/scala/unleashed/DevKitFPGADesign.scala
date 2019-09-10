@@ -65,7 +65,6 @@ class DevKitWrapper()(implicit p: Parameters) extends LazyModule
 case object DevKitFPGAFrequencyKey extends Field[Double](100.0)
 
 class DevKitFPGADesign(wranglerNode: ClockAdapterNode)(implicit p: Parameters) extends RocketSubsystem
-    with HasPeripheryMaskROMSlave
     with HasPeripheryDebug
 {
   val tlclock = new FixedClockResource("tlclk", p(DevKitFPGAFrequencyKey))
