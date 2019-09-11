@@ -15,6 +15,7 @@ import sifive.blocks.devices.pwm._
 import sifive.blocks.devices.spi._
 import sifive.blocks.devices.uart._
 import sifive.blocks.devices.i2c._
+import sifive.blocks.can._
 
 // Default FreedomEConfig
 class DefaultFreedomEConfig extends Config (
@@ -28,6 +29,10 @@ class DefaultFreedomEConfig extends Config (
 class E300DevKitPeripherals extends Config((site, here, up) => {
   case PeripheryGPIOKey => List(
     GPIOParams(address = 0x10012000, width = 32, includeIOF = true))
+  case PeripheryCANKey => List(
+    CANParams(rAddress = 0x7000),
+    CANParams(rAddress = 0x8000),
+    CANParams(rAddress = 0x9000))
   case PeripheryPWMKey => List(
     PWMParams(address = 0x10015000, cmpWidth = 8),
     PWMParams(address = 0x10025000, cmpWidth = 16),

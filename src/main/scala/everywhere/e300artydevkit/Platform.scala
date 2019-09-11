@@ -19,6 +19,7 @@ import sifive.blocks.devices.spi._
 import sifive.blocks.devices.uart._
 import sifive.blocks.devices.i2c._
 import sifive.blocks.devices.pinctrl._
+import sifive.blocks.can._
 
 //-------------------------------------------------------------------------
 // PinGen
@@ -76,16 +77,19 @@ class E300ArtyDevKitPlatform(implicit val p: Parameters) extends Module {
   val sys_pwm  = sys.pwm
   val sys_spi  = sys.spi
   val sys_i2c  = sys.i2c
+  val sys_can  = sys.can
 
   val uart_pins = p(PeripheryUARTKey).map { c => Wire(new UARTPins(() => PinGen()))}
   val pwm_pins  = p(PeripheryPWMKey).map  { c => Wire(new PWMPins(() => PinGen(), c))}
   val spi_pins  = p(PeripherySPIKey).map  { c => Wire(new SPIPins(() => PinGen(), c))}
   val i2c_pins  = p(PeripheryI2CKey).map  { c => Wire(new I2CPins(() => PinGen()))}
+  val can_pins  = p(PeripheryCANKey).map  { c => Wire(new CANPins(() => PinGen()))}
 
   (uart_pins zip  sys_uart) map {case (p, r) => UARTPinsFromPort(p, r, clock = clock, reset = reset, syncStages = 0)}
   (pwm_pins  zip  sys_pwm)  map {case (p, r) => PWMPinsFromPort(p, r) }
   (spi_pins  zip  sys_spi)  map {case (p, r) => SPIPinsFromPort(p, r, clock = clock, reset = reset, syncStages = 0)}
   (i2c_pins  zip  sys_i2c)  map {case (p, r) => I2CPinsFromPort(p, r, clock = clock, reset = reset, syncStages = 0)}
+  (can_pins  zip  sys_can)  map {case (p, r) => CANPinsFromPort(p, r, clock = clock, reset = reset, syncStages = 0)}
 
   //-----------------------------------------------------------------------
   // Default Pin connections before attaching pinmux
@@ -135,6 +139,16 @@ class E300ArtyDevKitPlatform(implicit val p: Parameters) extends Module {
   // UART1
   BasePinToIOF(uart_pins(1).rxd, iof_0(24))
   BasePinToIOF(uart_pins(1).txd, iof_0(25))
+
+  // CAN0
+  BasePinToIOF(can_pins(0).in, iof_0(18))
+  BasePinToIOF(can_pins(0).out, iof_0(19))
+  // CAN1
+  BasePinToIOF(can_pins(1).in, iof_0(20))
+  BasePinToIOF(can_pins(1).out, iof_0(21))
+  // CAN2
+  BasePinToIOF(can_pins(2).in, iof_0(22))
+  BasePinToIOF(can_pins(2).out, iof_0(23))
 
   //PWM
   BasePinToIOF(pwm_pins(0).pwm(0), iof_1(0) )

@@ -164,9 +164,16 @@ class E300ArtyDevKitFPGAChip(implicit override val p: Parameters) extends ArtySh
     attach(btn_3, iobuf_btn_3.io.IO)
     dut.io.pins.aon.pmu.dwakeup_n.i.ival := ~iobuf_btn_3.io.O & dut.io.pins.aon.pmu.dwakeup_n.o.ie
 
-    // UART1 RX/TX pins are assigned to PMOD_D connector pins 0/1
+    // UART1 RX/TX pins are assigned to PMOD_A connector pins 0/1
     IOBUF(ja_0, dut.io.pins.gpio.pins(25)) // UART1 TX
     IOBUF(ja_1, dut.io.pins.gpio.pins(24)) // UART1 RX
+    IOBUF(ja_2, dut.io.pins.gpio.pins(18)) // CAN0 in
+    IOBUF(ja_3, dut.io.pins.gpio.pins(19)) // CAN0 out
+    IOBUF(ja_4, dut.io.pins.gpio.pins(20)) // CAN1 in
+    IOBUF(ja_5, dut.io.pins.gpio.pins(21)) // CAN1 out
+    IOBUF(ja_6, dut.io.pins.gpio.pins(22)) // CAN2 in
+    IOBUF(ja_7, dut.io.pins.gpio.pins(23)) // CAN2 out
+
 
     // SPI2 pins mapped to 6 pin ICSP connector (standard on later
     // arduinos) These are connected to some extra GPIO pins not connected
